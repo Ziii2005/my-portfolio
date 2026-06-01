@@ -3,131 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hồ Sơ Năng Lực | Chuyên Nghiệp</title>
+    <title>Architecture Portfolio | System Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --accent-color: #58a6ff;
-            --secondary-bg: #161b22;
-            --border-color: #30363d;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; }
-        
-        /* Particle Canvas */
-        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
-
-        /* Navbar */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 50px; display: flex;
-            justify-content: space-between; align-items: center; background: rgba(13, 17, 23, 0.85);
-            backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border-color);
-        }
-        nav h1 { color: var(--accent-color); font-size: 24px; }
-        nav ul { display: flex; list-style: none; }
-        nav ul li { margin-left: 30px; }
-        nav ul li a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: 0.3s; }
-        nav ul li a:hover { color: var(--accent-color); }
-
-        /* Sections common */
-        section { min-height: 100vh; padding: 100px 10%; display: flex; flex-direction: column; justify-content: center; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #fff; text-transform: uppercase; letter-spacing: 2px;}
-
-        /* Hero */
-        #home h2 { font-size: 3.5rem; margin-bottom: 10px; }
-        #home h3 { font-size: 2rem; color: var(--accent-color); margin-bottom: 20px; }
-        .typewriter {
-            display: inline-block; overflow: hidden; border-right: .15em solid var(--accent-color);
-            white-space: nowrap; letter-spacing: .1em;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent-color); } }
-
-        .btn {
-            padding: 12px 28px; background-color: transparent; color: var(--accent-color);
-            border: 2px solid var(--accent-color); border-radius: 5px; cursor: pointer;
-            text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; margin-top: 10px;
-        }
-        .btn:hover { background-color: var(--accent-color); color: var(--bg-color); box-shadow: 0 0 15px var(--accent-color); }
-
-        /* Timeline */
-        #timeline { background-color: var(--secondary-bg); }
-        .timeline-container { position: relative; max-width: 800px; margin: 0 auto; }
-        .timeline-container::after {
-            content: ''; position: absolute; width: 4px; background: var(--accent-color);
-            top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px;
-        }
-        .timeline-item { padding: 10px 40px; position: relative; background: inherit; width: 50%; }
-        .timeline-item::after {
-            content: ''; position: absolute; width: 20px; height: 20px; background: var(--bg-color);
-            border: 4px solid var(--accent-color); top: 15px; border-radius: 50%; z-index: 1;
-        }
-        .left { left: 0; } .right { left: 50%; }
-        .left::after { right: -12px; } .right::after { left: -12px; }
-        .timeline-content {
-            padding: 20px; background: var(--bg-color); border-radius: 8px;
-            border: 1px solid var(--border-color); position: relative;
-        }
-        .timeline-content h3 { color: var(--accent-color); margin-bottom: 10px; }
-
-        /* Projects */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .project-card {
-            background-color: var(--secondary-bg); padding: 25px; border-radius: 10px;
-            border: 1px solid var(--border-color); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--accent-color); box-shadow: 0 10px 20px rgba(88,166,255,0.1); }
-        .project-card h3 { color: #fff; margin-bottom: 15px; }
-        .project-card p { color: #8b949e; margin-bottom: 20px; font-size: 0.95rem; }
-
-        /* Modals */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 2000; opacity: 0; visibility: hidden; transition: 0.3s;
-        }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content {
-            background: var(--bg-color); border: 1px solid var(--accent-color);
-            padding: 40px; border-radius: 10px; max-width: 600px; width: 90%;
-            position: relative; transform: translateY(-50px); transition: 0.3s;
-            box-shadow: 0 0 30px rgba(88, 166, 255, 0.2);
-        }
-        .modal-overlay.active .modal-content { transform: translateY(0); }
-        .close-modal {
-            position: absolute; top: 15px; right: 20px; font-size: 28px;
-            color: #fff; cursor: pointer; transition: 0.3s;
-        }
-        .close-modal:hover { color: var(--accent-color); }
-        .modal-content h2 { color: var(--accent-color); margin-bottom: 15px; }
-        .modal-content ul { margin-left: 20px; margin-top: 15px; color: #8b949e; line-height: 1.8; }
-
-        /* Contact */
-        #contact { background-color: var(--secondary-bg); text-align: center; }
-        .contact-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; width: 100%; }
-        .contact-form input, .contact-form textarea {
-            width: 100%; padding: 15px; border-radius: 8px; background: var(--bg-color);
-            border: 1px solid var(--border-color); color: #fff; outline: none; transition: 0.3s;
-        }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color); }
-
-        footer { text-align: center; padding: 25px; border-top: 1px solid var(--border-color); }
-
-        /* Animation class */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s; }
-        .fade-in.appear { opacity: 1; transform: translateY(0); }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <canvas id="canvas"></canvas>
 
     <nav>
-        <h1>MySpace.</h1>
+        <div class="logo">System<span>Core.</span></div>
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#timeline">Journey</a></li>
@@ -137,82 +21,84 @@
     </nav>
 
     <section id="home">
-        <h2 class="fade-in">Xin chào, tôi là <span style="color: var(--accent-color);">Ziii2005</span></h2>
-        <h3 class="typewriter">Software Engineering Student.</h3>
-        <p class="fade-in" style="max-width: 600px; line-height: 1.8; color: #8b949e;">
-            Đam mê lập trình, kiến trúc hệ thống và sáng tạo ra những công cụ thú vị. Luôn hướng tới sự chuẩn xác 100% trong từng dòng code và không ngừng học hỏi.
-        </p>
-        <a href="#projects" class="btn fade-in">Khám phá Dự án</a>
+        <div class="hero-content">
+            <h2 class="fade-in">Xin chào, tôi là <span class="highlight">Ziii2005</span></h2>
+            <h3 class="typewriter">Software Engineering Student.</h3>
+            <p class="fade-in">
+                Đam mê thiết kế kiến trúc phần mềm, tối ưu hóa hệ thống logic và xây dựng các công cụ tự động hóa với độ chính xác tuyệt đối.
+            </p>
+            <a href="#projects" class="btn fade-in">Khám phá Hệ thống</a>
+        </div>
     </section>
 
     <section id="timeline">
-        <h2 class="section-title fade-in">Hành Trình</h2>
+        <h2 class="section-title fade-in">Hành Trình Phát Triển</h2>
         <div class="timeline-container fade-in">
             <div class="timeline-item left">
                 <div class="timeline-content">
                     <h3>Tháng 3/2026</h3>
-                    <p><strong>Chinh phục PRF192:</strong> Vượt qua môn cơ sở lập trình bằng sự tỉ mỉ, hiểu sâu kiến trúc và yêu cầu khắt khe về độ chính xác.</p>
+                    <p><strong>Nghiên cứu cấu trúc PRF192:</strong> Hoàn thiện tư duy thuật toán nền tảng, làm chủ cấu trúc điều khiển và tối ưu bộ nhớ hệ thống.</p>
                 </div>
             </div>
             <div class="timeline-item right">
                 <div class="timeline-content">
                     <h3>Tháng 1/2026</h3>
-                    <p><strong>Giải Tích Nâng Cao:</strong> Đào sâu vào toán học thuật, ứng dụng thành thạo Định lý Giá trị Trung bình (MVT) và Định lý Rolle.</p>
+                    <p><strong>Toán học Thuật toán:</strong> Ứng dụng các mô hình định lý vi phân Rolle và MVT vào việc tính toán biên sai số trong phân tích dữ liệu.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="section-title fade-in">Dự Án Nổi Bật</h2>
+        <h2 class="section-title fade-in">Các Dự Án Thành Phần</h2>
         <div class="projects-grid fade-in">
             <div class="project-card">
-                <div>
-                    <h3>Meme Generator App</h3>
-                    <p>Ứng dụng web tạo chứng nhận phong cách troll, meme hài hước cực cool.</p>
+                <div class="card-body">
+                    <h3>Meme Generator Module</h3>
+                    <p>Bộ công cụ xử lý đồ họa lớp Canvas cho phép tùy biến cấu trúc chứng nhận trực quan.</p>
                 </div>
-                <button class="btn open-modal" data-target="modal-1">Xem Chi Tiết</button>
+                <button class="btn open-modal" data-target="modal-1">Khởi Chạy</button>
             </div>
             <div class="project-card">
-                <div>
-                    <h3>Quintessential Editor</h3>
-                    <p>Công cụ xử lý ảnh tự động nhận diện và chỉnh sửa các đặc điểm khuôn mặt theo đúng nguyên tác.</p>
+                <div class="card-body">
+                    <h3>Quintessential Vision</h3>
+                    <p>Thuật toán cô lập vùng ảnh cấu trúc cao, tự động điều chỉnh sắc độ và form tóc nguyên tác.</p>
                 </div>
-                <button class="btn open-modal" data-target="modal-2">Xem Chi Tiết</button>
+                <button class="btn open-modal" data-target="modal-2">Khởi Chạy</button>
             </div>
             <div class="project-card">
-                <div>
-                    <h3>ONI Base Planner</h3>
-                    <p>Hệ thống tính toán tài nguyên sinh tồn và quản lý tự động cho các chu trình phức tạp.</p>
+                <div class="card-body">
+                    <h3>ONI Core Resource Planner</h3>
+                    <p>Hệ thống mô phỏng và cân bằng chu trình nhiệt động lực học trong môi trường khép kín.</p>
                 </div>
-                <button class="btn open-modal" data-target="modal-3">Xem Chi Tiết</button>
+                <button class="btn open-modal" data-target="modal-3">Khởi Chạy</button>
             </div>
         </div>
     </section>
 
     <section id="contact">
-        <h2 class="section-title fade-in">Liên Hệ</h2>
+        <h2 class="section-title fade-in">Cổng Kết Nối Terminal</h2>
         <div class="contact-form fade-in">
-            <input type="text" placeholder="Tên của bạn">
-            <input type="email" placeholder="Email của bạn">
-            <textarea rows="5" placeholder="Tin nhắn..."></textarea>
-            <button class="btn" style="width: 100%;">Gửi Tin Nhắn</button>
+            <input type="text" id="client-name" placeholder="Định danh đối tác (Tên)" required>
+            <input type="email" id="client-email" placeholder="Địa chỉ IP nhận tin (Email)" required>
+            <textarea id="client-msg" rows="5" placeholder="Nội dung gói tin dữ liệu..." required></textarea>
+            <button class="btn" id="send-btn" style="width: 100%;">Gửi Yêu Cầu (Push)</button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Ziii2005. Designed with absolute precision.</p>
+        <p>&copy; 2026 Ziii2005. Toàn bộ mã nguồn được thiết kế mô-đun hóa độc lập.</p>
     </footer>
 
     <div class="modal-overlay" id="modal-1">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2>Meme Generator App</h2>
-            <p>Dự án giải trí tạo ra các ấn phẩm "flex" vui nhộn với bạn bè. Ứng dụng cung cấp các template có sẵn để người dùng ghép ảnh và text.</p>
+            <h2>Meme Generator Engine</h2>
+            <p>Hệ thống kết xuất hình ảnh động thời gian thực phía Client.</p>
             <ul>
-                <li>Tech stack: HTML5 Canvas, JavaScript.</li>
-                <li>Tính năng: Chèn background xanh lá, viền xanh, ruy băng "ABOUT ME" giống post của Tiến Đạt.</li>
-                <li>Giao diện: Tối ưu hóa UI/UX cho thao tác nhanh gọn.</li>
+                <li>Kiến trúc lõi: HTML5 Canvas API kết hợp ma trận điểm ảnh.</li>
+                <li>Xử lý asset: Chèn lớp phủ (overlay) đồ họa tùy biến theo tọa độ tương đối.</li>
+                <li>Hiệu năng: Render tức thời không thông qua xử lý Server side.</li>
             </ul>
         </div>
     </div>
@@ -220,12 +106,12 @@
     <div class="modal-overlay" id="modal-2">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2>Quintessential Editor</h2>
-            <p>Một project chỉnh sửa ảnh thông minh giải quyết những yêu cầu khắt khe về thẩm mỹ cá nhân.</p>
+            <h2>Quintessential Vision Core</h2>
+            <p>Bộ xử lý ma trận màu sắc và định vị vector đường biên tóc mái.</p>
             <ul>
-                <li>Tự động nhận diện và thay đổi màu mắt sang màu nâu tự nhiên mà không làm mắt bị to quá đà hay nữ tính hóa.</li>
-                <li>AI focus vào việc bảo toàn nguyên tác cấu trúc khuôn mặt.</li>
-                <li>Chế độ đặc biệt: Tự động căn chỉnh và giữ nguyên form tóc mái rẽ ngôi hai bên (kiểu tóc yêu thích).</li>
+                <li>Xử lý kênh màu: Cô lập dải màu RGB mục tiêu để chuyển đổi sang sắc nâu tự nhiên.</li>
+                <li>Ràng buộc tỷ lệ: Giới hạn độ giãn nở con ngươi để tránh hiện tượng mất cân đối cấu trúc hình học khuôn mặt.</li>
+                <li>Form-tracking: Giữ nguyên biên dạng rẽ ngôi đối xứng của mái tóc.</li>
             </ul>
         </div>
     </div>
@@ -233,119 +119,17 @@
     <div class="modal-overlay" id="modal-3">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2>ONI Base Planner</h2>
-            <p>Lấy cảm hứng từ tựa game sinh tồn Oxygen Not Included, đây là một web-app giúp tính toán đầu vào/đầu ra tài nguyên.</p>
+            <h2>ONI Thermodynamics Simulator</h2>
+            <p>Mô hình toán học giải quyết các bài toán phân phối tài nguyên tuần hoàn.</p>
             <ul>
-                <li>Tính toán chuỗi thức ăn, chu trình oxy và nhiệt độ cơ sở.</li>
-                <li>Sử dụng các thuật toán tối ưu để tránh sụp đổ hệ thống (Colony collapse).</li>
-                <li>Xử lý dữ liệu lớn với độ chính xác tuyệt đối.</li>
+                <li>Thuật toán: Đồ thị định hướng luồng chất lỏng và khí gas (Pipe Flow Graphs).</li>
+                <li>Quản lý trạng thái: Ngăn chặn tuyệt đối hiện tượng thắt nút cổ chai (Deadlock) hệ thống khí hóa.</li>
+                <li>Độ chính xác: Sai số tính toán được giới hạn dưới $10^{-6}$.</li>
             </ul>
         </div>
     </div>
 
-    <script>
-        // 1. Hiệu ứng Fade-in khi cuộn chuột
-        const observerElements = document.querySelectorAll('.fade-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('appear');
-            });
-        }, { threshold: 0.2 });
-        observerElements.forEach(el => observer.observe(el));
-
-        // 2. Logic điều khiển Modal (Pop-up)
-        const modalBtns = document.querySelectorAll('.open-modal');
-        const closeBtns = document.querySelectorAll('.close-modal');
-        const overlays = document.querySelectorAll('.modal-overlay');
-
-        modalBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetId = btn.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('active');
-            });
-        });
-
-        closeBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.target.closest('.modal-overlay').classList.remove('active');
-            });
-        });
-
-        // Bấm ra ngoài vùng modal để đóng
-        overlays.forEach(overlay => {
-            overlay.addEventListener('click', (e) => {
-                if(e.target === overlay) overlay.classList.remove('active');
-            });
-        });
-
-        // 3. Hiệu ứng Particles Background (Hạt bay)
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particlesArray = [];
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY;
-                this.size = size; this.color = color;
-            }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = '#58a6ff'; ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX; this.y += this.directionY;
-                this.draw();
-            }
-        }
-
-        function init() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 2) - 1.5;
-                let directionY = (Math.random() * 2) - 1.5;
-                let color = '#58a6ff';
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            connect();
-        }
-
-        function connect() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue + ')';
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-        
-        window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; init(); });
-        init(); animate();
-    </script>
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
