@@ -328,3 +328,47 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+/* Bổ sung style cho khu vực Contact Terminal */
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 12px;
+}
+.form-group-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.contact-container input, .contact-container textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+.contact-container input:focus, .contact-container textarea:focus {
+    border-color: var(--accent-color);
+}
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #21262d;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-submit:hover {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+}
